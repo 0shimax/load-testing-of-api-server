@@ -19,7 +19,9 @@ services:
       - master
 
   api:
-    image: test-grpc-cpp
+    image: test-grpc-python
     ports:
       - "50051:50051"
+    environment:
+      - MODEL_PATH=$MODEL_PATH
     tty: true
