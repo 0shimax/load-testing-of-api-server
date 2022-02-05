@@ -9,9 +9,9 @@ services:
     #     # S3_BUCKET: $S3_BUCKET
     #     # S3_BUCKET_KEY: $S3_BUCKET_KEY
     #     MODEL_PATH: $MODEL_PATH
-    # volumes:
-    #   - ./models:/models
-    #   - ./app:/app
+    volumes:
+      - ./models:/models
+      - ./app:/app
     ports:
       - "50052:50051"
     environment:

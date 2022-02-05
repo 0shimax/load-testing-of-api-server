@@ -10,7 +10,7 @@ import time
 
 async def request(stub, payloads):
     start = time.perf_counter()
-    responses = stub.predict(iter(payloads))
+    responses = stub.Predict(iter(payloads))
     while True:
         response = await responses.read()
         if response == grpc.aio.EOF:
@@ -30,7 +30,7 @@ async def run():
 async def update():
     async with grpc.aio.insecure_channel('localhost:50051') as channel:
         stub = CTCVInferenceServicerStub(channel)
-        res = stub.update_model(UpdateParams(param="updating"))
+        res = stub.UpdateModel(UpdateParams(param="updating"))
         while True:
             response = await res
             if response == grpc.aio.EOF:
