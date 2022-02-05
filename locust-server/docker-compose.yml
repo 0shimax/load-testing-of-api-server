@@ -1,0 +1,25 @@
+version: '3.3'
+services:
+  master:
+    image: locust-grpc:latest
+    command: -f /scripts/load_test_grpc_script.py --master -H http://master:8089
+    ports:
+      - "9001:8089"
+    volumes:
+      - ./scripts:/scripts
+    tty: true
+
+  worker:
+    image: locust-grpc:latest
+    command: -f /scripts/load_test_grpc_script.py --worker --master-host master
+    volumes:
+      - ./scripts:/scripts
+    tty: true
+    depends_on:
+      - master
+
+  api:
+    image: test-grpc-cpp
+    ports:
+      - "50051:50051"
+    tty: true
